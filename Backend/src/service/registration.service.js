@@ -13,7 +13,7 @@ export default class RegistrationService {
      * Konstruktor.
      */
     constructor() {
-        this._registrations = DatabaseFactory.database.collection("registrations");
+        this._registrations = DatabaseFactory.database.collection("registration");
     }
 
     /**

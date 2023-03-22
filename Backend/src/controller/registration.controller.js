@@ -51,7 +51,7 @@ export default class RegistrationController {
     }
 
     /**
-     * GET /member
+     * GET /registration
      * Anmeldung suchen
      */
     async search(req, res, next) {
@@ -77,7 +77,7 @@ export default class RegistrationController {
     }
 
     /**
-     * GET /member/:id
+     * GET /registration/:id
      * Anmeldungen auslesen
      */
     async read(req, res, next) {

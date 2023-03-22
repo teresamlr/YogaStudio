@@ -31,7 +31,7 @@ class DatabaseFactory {
      * wenigstens gleich ein paar Daten.
      */
     async _createDemoData() {
-        let registrations = this.database.collection("registrations");
+        let registrations = this.database.collection("registration");
 
         if (await registrations.estimatedDocumentCount() === 0) {
             registrations.insertMany([
