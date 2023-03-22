@@ -6,7 +6,7 @@ import OpenApiEnforcerMiddleware from "@dschulmeis/restify-openapi-enforcer-midd
 
 import DatabaseFactory from "./database.js";
 import RootController from "./controller/root.controller.js";
-import AdressController from "./controller/address.controller.js";
+import RegistrationController from "./controller/registration.controller.js";
 
 // Verzeichnisnamen der Quellcodedatei ermitteln
 import path from "path";
@@ -91,13 +91,13 @@ server.use(OpenApiEnforcerMiddleware(openApiEnforcer));
 
 // HTTP-Controller registrieren
 new RootController(server, "/", openApiFile);
-new AdressController(server, "/address");
+new RegistrationController(server, "/registration");
 
 // Server tatsächlich starten
 server.listen(config.port, config.host, function() {
     console.log();
     console.log("=================");
-    console.log("Adressbuch-Server");
+    console.log("Anmeldungen-Server");
     console.log("=================");
     console.log();
     console.log("Ausführung mit folgender Konfiguration:");

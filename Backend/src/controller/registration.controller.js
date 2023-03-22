@@ -1,15 +1,15 @@
 "use strict"
 
-import AddressService from "../service/address.service.js";
+import RegistrationService from "../service/registration.service";
 import {wrapHandler} from "../utils.js";
 import RestifyError from "restify-errors";
 
 /**
- * HTTP-Controller-Klasse für Adressbucheinträge. Diese Klasse registriert
+ * HTTP-Controller-Klasse für Kursanmeldungen. Diese Klasse registriert
  * alle notwendigen URL-Handler beim Webserver für einen einfachen REST-
- * Webservice zum Lesen und Schreiben von Adressen.
+ * Webservice zum Lesen und Schreiben von Anmeldungen.
  */
-export default class AddressController {
+export default class RegistrationController {
     /**
      * Konstruktor. Hier werden die URL-Handler registrert.
      *
@@ -17,14 +17,14 @@ export default class AddressController {
      * @param {String} prefix Gemeinsamer Prefix aller URLs
      */
     constructor(server, prefix) {
-        this._service = new AddressService();
+        this._service = new RegistrationService();
         this._prefix = prefix;
 
-        // Collection: Adressen
+        // Collection: Anmeldungen
         server.get(prefix, wrapHandler(this, this.search));
         server.post(prefix, wrapHandler(this, this.create));
 
-        // Entity: Adresse
+        // Entity: Mitglied
         server.get(prefix + "/:id", wrapHandler(this, this.read));
         server.put(prefix + "/:id", wrapHandler(this, this.update));
         server.patch(prefix + "/:id", wrapHandler(this, this.update));
@@ -51,8 +51,8 @@ export default class AddressController {
     }
 
     /**
-     * GET /address
-     * Adressen suchen
+     * GET /member
+     * Anmeldung suchen
      */
     async search(req, res, next) {
         let result = await this._service.search(req.query);
@@ -62,8 +62,8 @@ export default class AddressController {
     }
 
     /**
-     * POST /address
-     * Neue Adresse anlegen
+     * POST /member
+     * Neue Anmeldung anlegen
      */
     async create(req, res, next) {
         let result = await this._service.create(req.body);
@@ -77,8 +77,8 @@ export default class AddressController {
     }
 
     /**
-     * GET /address/:id
-     * Adresse auslesen
+     * GET /member/:id
+     * Anmeldungen auslesen
      */
     async read(req, res, next) {
         let result = await this._service.read(req.params.id);
@@ -87,16 +87,16 @@ export default class AddressController {
             this._insertHateoasLinks(result);
             res.sendResult(result);
         } else {
-            throw new RestifyError.NotFoundError("Adresse nicht gefunden");
+            throw new RestifyError.NotFoundError("Anmeldung nicht gefunden");
         }
 
         return next();
     }
 
     /**
-     * PUT /address/:id
-     * PATCH /address/:id
-     * Adresse ändern
+     * PUT /registration/:id
+     * PATCH /registration/:id
+     * Anmdeldung ändern
      */
     async update(req, res, next) {
         let result = await this._service.update(req.params.id, req.body);
@@ -105,15 +105,15 @@ export default class AddressController {
             this._insertHateoasLinks(result);
             res.sendResult(result);
         } else {
-            throw new RestifyError.NotFoundError("Adresse nicht gefunden");
+            throw new RestifyError.NotFoundError("Anmeldung nicht gefunden");
         }
 
         return next();
     }
 
     /**
-     * DELETE /address/:id
-     * Adresse löschen
+     * DELETE /registration/:id
+     * Anmeldung löschen
      */
     async delete(req, res, next) {
         await this._service.delete(req.params.id)
