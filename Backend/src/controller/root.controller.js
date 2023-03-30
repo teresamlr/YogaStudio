@@ -30,7 +30,7 @@ export default class RootController {
      * so dass Clients die URL-Struktur des Webservices entdecken können).
      */
     async index(req, res, next) {
-        res.sendResult([
+        res.send([
             {
                 _name: "registration",
                 query: {url: "/registration", method: "GET", query_params: ["search", "first_name", "last_name", "phone", "memberID"]},
