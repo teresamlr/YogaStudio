@@ -1,15 +1,19 @@
 openapi: 3.1.0
-
 info:
-  title: Yogastudio 
-  version: 1.0.0
-  description: "API für die Single-Page-App eines Yogastudios"
-
+  title: MyAPP
+  description: "__ TODO: Diese Datei durch eine eigene API-Spezifikation ersetzen. __"
+  contact:
+    name: Dennis Schulmeister-Zimolong
+    url: https://www.wpvs.de
+    email: dhbw@windows3.de
+  license:
+    name: CC-BY-4.0
+    url: https://creativecommons.org/licenses/by/4.0/deed.de
+  version: "1.0"
 servers:
-- url: http://localhost:3000/api 
+- url: http://localhost:3000
 tags:
-- name: Index
-- name: Registration
+- name: Beispiel
 paths:
   /:
     get:
@@ -28,186 +32,6 @@ paths:
                 items:
                   $ref: '#/components/schemas/HATEOAS_Collection'
                 x-content-type: application/json
-
-  /member:
-    get:
-      tags:
-      - Registration
-      summary: Anmeldung suchen
-      description: Suche nach Anmeldungen. Gibt eine Liste aller Anmeldungen passend zu
-        den übergebenen Suchkriterien zurück.
-      operationId: search-registration
-      parameters:
-      - name: first_name
-        in: query
-        description: Gesuchter Vorname
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-      - name: last_name
-        in: query
-        description: Gesuchter Nachname
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-      - name: phone
-        in: query
-        description: Gesuchte Telefonnummer
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-      - name: memberID
-        in: query
-        description: Gesuchte Mitgliedsnummer
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Registration'
-                x-content-type: application/json
-    post:
-      tags:
-      - Registration
-      summary: Anmeldung hinzufügen
-      description: "Neue Anmeldung hinzufügen. Speichert die übergebene Anmeldung in der\
-        \ Datenbank. Der Wert des Feldes \"_id\" wird dabei ignoriert, da in jedem Fall\
-        \ eine neue Anmeldung mit neuer ID angelegt wird."
-      operationId: create-registration
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Registration'
-      responses:
-        "201":
-          description: Created
-          headers:
-            Location:
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Registration'
-
-  /address/{id}:
-    get:
-      tags:
-      - Registration
-      summary: Anmeldung lesen
-      description: Liest eine einzelne Anmeldung vom Server.
-      operationId: get-registration
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Registration'
-        "404":
-          description: Not Found
-    put:
-      tags:
-      - Anmeldung überschreiben
-      summary: ""
-      description: "Überschreibt eine vorhandene Anmeldung auf dem Server. Bis auf die\
-        \ ID können alle Felder geändert werden. Der Versuch, die ID zu ändern, wird\
-        \ vom Server stillschweigend ignoriert."
-      operationId: update-registration
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Registration'
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Registration'
-        "404":
-          description: Not Found
-    patch:
-      tags:
-      - Einzelne Felder ändern
-      summary: Einzelne Anmeldungsfelder ändern
-      description: "Ändert einzelne Felder einer vorhandenen Anmeldung. Zulässig sind\
-        \ alle Felder bis auf die ID, da diese nachträglich nicht mehr verändert werden\
-        \ darf."
-      operationId: patch-registration
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Registration'
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Registration'
-        "404":
-          description: Not Found
-    delete:
-      tags:
-      - Registration
-      summary: Anmeldung löschen
-      description: Löscht eine Anmeldung auf dem Server.
-      operationId: delete-registration
-      parameters:
-      - name: id
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      responses:
-        "200":
-          description: OK
-        "404":
-          description: Not Found
 
 components:
   schemas:
@@ -248,29 +72,4 @@ components:
           items:
             type: string
 
-    Address:
-      title: Registration
-      type: object
-      properties:
-        _links:
-          $ref: '#/components/schemas/HATEOAS_Resource'
-        _id:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-        phone:
-          type: string
-        memberID:
-          type: string
-      required:
-        - first_name
-        - last_name
-      example:
-        _id: "621ff9a936997df5baba746e"
-        first_name: "Fox"
-        last_name: "Mulder"
-        memberID: "5"
-        phone: "+49 721 553181"
   securitySchemes: {}
