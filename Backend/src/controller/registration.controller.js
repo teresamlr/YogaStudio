@@ -57,7 +57,7 @@ export default class RegistrationController {
     async search(req, res, next) {
         let result = await this._service.search(req.query);
         result.forEach(entity => this._insertHateoasLinks(entity));
-        res.sendResult(result);
+        res.send(result);
         return next();
     }
 
@@ -71,7 +71,7 @@ export default class RegistrationController {
 
         res.status(201);
         res.header("Location", `${this._prefix}/${result._id}`);
-        res.sendResult(result);
+        res.send(result);
 
         return next();
     }
@@ -85,7 +85,7 @@ export default class RegistrationController {
 
         if (result) {
             this._insertHateoasLinks(result);
-            res.sendResult(result);
+            res.send(result);
         } else {
             throw new RestifyError.NotFoundError("Anmeldung nicht gefunden");
         }
@@ -103,7 +103,7 @@ export default class RegistrationController {
 
         if (result) {
             this._insertHateoasLinks(result);
-            res.sendResult(result);
+            res.send(result);
         } else {
             throw new RestifyError.NotFoundError("Anmeldung nicht gefunden");
         }
@@ -118,7 +118,7 @@ export default class RegistrationController {
     async delete(req, res, next) {
         await this._service.delete(req.params.id)
         res.status(204);
-        res.sendResult({});
+        res.send({});
         return next();
     }
 }
