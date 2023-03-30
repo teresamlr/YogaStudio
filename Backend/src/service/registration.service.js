@@ -49,7 +49,7 @@ export default class RegistrationService {
             first_name:  registration.first_name || "",
             last_name:   registration.last_name  || "",
             phone:       registration.phone      || "",
-            memberID: registration.memberID      || "",
+            memberID:    registration.memberID      || "",
         };
 
         let result = await this._registrations.insertOne(newRegistration);

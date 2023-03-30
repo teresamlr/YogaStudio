@@ -71,3 +71,4 @@ class DatabaseFactory {
 }
 
 export default new DatabaseFactory();
+

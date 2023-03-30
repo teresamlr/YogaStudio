@@ -82,7 +82,7 @@ paths:
                 x-content-type: application/json
     post:
       tags:
-      - Anmeldung
+      - Registration
       summary: Anmeldung hinzufügen
       description: "Neue Anmeldung hinzufügen. Speichert die übergebene Anmeldung in der\
         \ Datenbank. Der Wert des Feldes \"_id\" wird dabei ignoriert, da in jedem Fall\
@@ -108,7 +108,7 @@ paths:
   /address/{id}:
     get:
       tags:
-      - Anmeldung
+      - Registration
       summary: Anmeldung lesen
       description: Liest eine einzelne Anmeldung vom Server.
       operationId: get-registration
