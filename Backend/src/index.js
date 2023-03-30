@@ -11,6 +11,7 @@ import RegistrationController from "./controller/registration.controller.js";
 // Verzeichnisnamen der Quellcodedatei ermitteln
 import path from "path";
 import { fileURLToPath } from "url";
+import RegistrationController from "./controller/registration.controller.js";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /* =============================================================================
@@ -87,10 +88,10 @@ const openApiEnforcer = await OpenApiEnforcer(openApiFile, {
     },
 });
 
-server.use(OpenApiEnforcerMiddleware(openApiEnforcer));
+//server.use(OpenApiEnforcerMiddleware(openApiEnforcer));
 
 // HTTP-Controller registrieren
-new RootController(server, "/", openApiFile);
+new RootController(server, "/");
 new RegistrationController(server, "/registration");
 
 // Server tatsächlich starten
