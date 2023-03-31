@@ -32,9 +32,9 @@ export default class RootController {
     async index(req, res, next) {
         res.sendResult([
             {
-                _name: "example",
-                query: {url: "/example", method: "GET", query_params: ["search", "first_name", "last_name", "phone", "memberID"]},
-                create: {url: "/example", method: "POST"},
+                _name: "registration",
+                query: {url: "/registration", method: "GET", query_params: ["search", "first_name", "last_name", "phone", "member_ID"]},
+                create: {url: "/registration", method: "POST"},
             }
         ]);
 
