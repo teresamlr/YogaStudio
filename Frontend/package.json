@@ -1,7 +1,7 @@
 {
-    "name": "adressbuch-frontent",
+    "name": "yogastudio-frontent",
     "version": "1.0.0",
-    "description": "Adressbuch: Frontend",
+    "description": "Yogastudio: Frontend",
     "author": "Dennis Schulmeister-Zimolong",
     "license": "CC-BY-4.0",
     "type": "module",

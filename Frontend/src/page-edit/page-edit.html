@@ -2,7 +2,7 @@
 <style>
     /* FORMULARFELDER */
     main {
-        background-color: white;
+        background-color: lightgrey;
         padding: 1em;
     }
 
@@ -13,8 +13,9 @@
         border: 0px solid lightgrey;
         border-bottom-width: 1px;
 
-        padding: 0.5em 0 0.5em 0;
+        padding: 0.5em 0 0.5em 0.7em;
         margin-bottom: 1em;
+        border-radius: 18px;
     }
 
     /* AKTIONSBUTTONS */
@@ -25,10 +26,11 @@
 
     main .actions > div {
         padding: 0.5em;
-        margin: 0.5em;
+        margin: 1em;
+        border-radius: 18px;
 
-        background-color: #e0e0e0;
-        transition: background-color 0.5s;
+        background-color: white;
+        transition: background-color 0.3s;
 
         flex: 1;
         text-align: center;
@@ -43,7 +45,7 @@
     }
 
     main .actions > div:hover {
-        background-color: #f0f0f0;
+        background-color: #097770;
         cursor: pointer;
     }
 </style>
@@ -59,7 +61,7 @@
         </div>
         <div class="actions">
             <div class="action save">
-                <a>💾</a>
+                <a>Speichern</a>
             </div>
         </div>
     </div>

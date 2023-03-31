@@ -2,7 +2,7 @@
 
 import restify from "restify";
 import OpenApiEnforcer from "openapi-enforcer";
-import OpenApiEnforcerMiddleware from "@dschulmeis/restify-openapi-enforcer-middleware";
+// import OpenApiEnforcerMiddleware from "@dschulmeis/restify-openapi-enforcer-middleware";
 
 import DatabaseFactory from "./database.js";
 import RootController from "./controller/root.controller.js";
@@ -98,7 +98,7 @@ new RegistrationController(server, "/registration");
 server.listen(config.port, config.host, function() {
     console.log();
     console.log("=================");
-    console.log("Anmeldungen-Server");
+    console.log("Registration-Server");
     console.log("=================");
     console.log();
     console.log("Ausführung mit folgender Konfiguration:");

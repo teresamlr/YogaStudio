@@ -13,7 +13,7 @@
         padding-bottom: 0.5em;
 
         background-color: white;
-        transition: background-color 0.5s;
+        transition: background-color 0.3s;
 
         border: 0px solid lightgrey;
         border-bottom-width: 1px;
@@ -35,7 +35,8 @@
 
     main .actions > div {
         padding: 0.5em;
-        margin: 0.5em;
+        margin: 1em;
+        border-radius: 18px;
 
         background-color: #e0e0e0;
         transition: background-color 0.5s;
@@ -53,7 +54,7 @@
     }
 
     main .actions > div:hover {
-        background-color: #f0f0f0;
+        background-color: #edca82;
         cursor: pointer;
     }
 </style>
@@ -76,15 +77,15 @@
             <div class="field phone">
                 $PHONE$
             </div>
-            <div class="field email">
-                $EMAIL$
+            <div class="field memberID">
+                $MEMBERID$
             </div>
             <div class="actions">
                 <div class="action edit">
-                    <a>🖊️</a>
+                    <a>Bearbeiten</a>
                 </div>
                 <div class="action delete">
-                    <a>🗑️</a>
+                    <a>Entfernen</a>
                 </div>
             </div>
         </li>
