@@ -8,12 +8,12 @@ import {ObjectId} from "mongodb";
  * eigentliche Anwendungslogik losgelöst vom technischen Übertragungsweg.
  * Die Anmeldungen werden in einer MongoDB abgelegt.
  */
-export default class RegistrationService {
+export default class ReviewService {
     /**
      * Konstruktor.
      */
     constructor() {
-        this._registration = DatabaseFactory.database.collection("registration");
+        this._review = DatabaseFactory.database.collection("review");
     }
 
     /**
@@ -26,7 +26,7 @@ export default class RegistrationService {
      * @return {Promise} Liste der gefundenen Anmeldungen
      */
     async search(query) {
-        let cursor = this._registration.find(query, {
+        let cursor = this._review.find(query, {
             sort: {
                 first_name: 1,
                 last_name: 1,
@@ -39,21 +39,20 @@ export default class RegistrationService {
     /**
      * Speichern einer neuen Anmeldung.
      *
-     * @param {Object} registration Zu speichernde Anmeldedaten
+     * @param {Object} review Zu speichernde Anmeldedaten
      * @return {Promise} Gespeicherte Anmeldedaten
      */
-    async create(registration) {
-        r = registration || {};
+    async create(review) {
+        r = review || {};
 
-        let newRegistration = {
-            first_name:  registration.first_name || "",
-            last_name:   registration.last_name  || "",
-            phone:       registration.phone      || "",
-            memberID:    registration.memberID      || "",
+        let newReview = {
+            first_name:  review.first_name || "",
+            last_name:   review.last_name  || "",
+            phone:       review.text       || "",
         };
 
-        let result = await this._registration.insertOne(newRegistration);
-        return await this._registration.findOne({_id: result.insertedId});
+        let result = await this._review.insertOne(newReview);
+        return await this._review.findOne({_id: result.insertedId});
     }
 
     /**
@@ -63,7 +62,7 @@ export default class RegistrationService {
      * @return {Promise} Gefundene Anmeldedaten
      */
     async read(id) {
-        let result = await this._registration.findOne({_id: new ObjectId(id)});
+        let result = await this._review.findOne({_id: new ObjectId(id)});
         return result;
     }
 
@@ -72,24 +71,23 @@ export default class RegistrationService {
      * oder des gesamten Anmeldeobjekts (ohne die ID).
      *
      * @param {String} id ID der gesuchten Anmeldung
-     * @param {[type]} registration Zu speichernde Anmeldung
+     * @param {[type]} review Zu speichernde Anmeldung
      * @return {Promise} Gespeicherte Anmeldung oder undefined
      */
-    async update(id, registration) {
-        let oldRegistration = await this._registration.findOne({_id: new ObjectId(id)});
-        if (!oldRegistration) return;
+    async update(id, review) {
+        let oldReview = await this._review.findOne({_id: new ObjectId(id)});
+        if (!oldReview) return;
 
         let updateDoc = {
             $set: {},
         }
 
-        if (registration.first_name) updateDoc.$set.first_name = registration.first_name;
-        if (registration.last_name)  updateDoc.$set.last_name  = registration.last_name;
-        if (registration.phone)      updateDoc.$set.phone      = registration.phone;
-        if (registration.memberID)   updateDoc.$set.memberID      = registration.memberID;
+        if (review.first_name) updateDoc.$set.first_name = review.first_name;
+        if (review.last_name)  updateDoc.$set.last_name  = review.last_name;
+        if (review.text)       updateDoc.$set.text       = review.phone;
 
-        await this._registration.updateOne({_id: new ObjectId(id)}, updateDoc);
-        return this._registration.findOne({_id: new ObjectId(id)});
+        await this._review.updateOne({_id: new ObjectId(id)}, updateDoc);
+        return this._review.findOne({_id: new ObjectId(id)});
     }
 
     /**
@@ -99,7 +97,7 @@ export default class RegistrationService {
      * @return {Promise} Anzahl der gelöschten Datensätze
      */
     async delete(id) {
-        let result = await this._registration.deleteOne({_id: new ObjectId(id)});
+        let result = await this._review.deleteOne({_id: new ObjectId(id)});
         return result.deletedCount;
     }
 }

@@ -7,11 +7,13 @@ import OpenApiEnforcer from "openapi-enforcer";
 import DatabaseFactory from "./database.js";
 import RootController from "./controller/root.controller.js";
 import RegistrationController from "./controller/registration.controller.js";
+import ReviewController from "./controller/review.controller.js";
 
 // Verzeichnisnamen der Quellcodedatei ermitteln
 import path from "path";
 import { fileURLToPath } from "url";
 import RegistrationController from "./controller/registration.controller.js";
+import ReviewController from "./controller/review.controller.js";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /* =============================================================================
@@ -93,6 +95,7 @@ const openApiEnforcer = await OpenApiEnforcer(openApiFile, {
 // HTTP-Controller registrieren
 new RootController(server, "/");
 new RegistrationController(server, "/registration");
+new ReviewController(server, "/review");
 
 // Server tatsächlich starten
 server.listen(config.port, config.host, function() {
