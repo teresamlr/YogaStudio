@@ -1,6 +1,6 @@
 "use strict"
 
-import RegistrationService from "../service/review.service.js";
+import ReviewService from "../service/review.service.js";
 import {wrapHandler} from "../utils.js";
 import RestifyError from "restify-errors";
 
@@ -9,7 +9,7 @@ import RestifyError from "restify-errors";
  * alle notwendigen URL-Handler beim Webserver für einen einfachen REST-
  * Webservice zum Lesen und Schreiben von Anmeldungen.
  */
-export default class RegistrationController {
+export default class ReviewController {
     /**
      * Konstruktor. Hier werden die URL-Handler registrert.
      *

@@ -48,7 +48,7 @@ export default class ReviewService {
         let newReview = {
             first_name:  review.first_name || "",
             last_name:   review.last_name  || "",
-            phone:       review.text       || "",
+            text:        review.text       || "",
         };
 
         let result = await this._review.insertOne(newReview);
@@ -84,7 +84,7 @@ export default class ReviewService {
 
         if (review.first_name) updateDoc.$set.first_name = review.first_name;
         if (review.last_name)  updateDoc.$set.last_name  = review.last_name;
-        if (review.text)       updateDoc.$set.text       = review.phone;
+        if (review.text)       updateDoc.$set.text       = review.text;
 
         await this._review.updateOne({_id: new ObjectId(id)}, updateDoc);
         return this._review.findOne({_id: new ObjectId(id)});

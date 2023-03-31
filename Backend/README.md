@@ -15,7 +15,7 @@ Inhaltsverzeichnis
 Kurzbeschreibung
 ----------------
 
-Dies ist der backendseitige REST-Webservice der Adressbuch-App. Es handelt sich
+Dies ist der backendseitige REST-Webservice der Yogastudio-App. Es handelt sich
 um ein einfaches nodeJS-Projekt mit dem Webframework [Restify](http://restify.com/).
 Die Schnittstelle des Webservices ist in der Datei `src/api/openapi.yaml`
 beschrieben.

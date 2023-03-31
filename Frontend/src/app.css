@@ -27,7 +27,6 @@ html {
 
 @media (min-width: 40em) {
     html {
-        /* http://bg.siteorigin.com/ */
         background-color: lightgrey;
         background-image: url(img/hintergrund.jpg);
         font-size: 11pt;

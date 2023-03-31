@@ -13,7 +13,7 @@ export default class RegistrationService {
      * Konstruktor.
      */
     constructor() {
-        this._registration = DatabaseFactory.database.collection("registration");
+        this._registration = DatabaseFactory.database.collection("registrationlist");
     }
 
     /**
@@ -86,7 +86,7 @@ export default class RegistrationService {
         if (registration.first_name) updateDoc.$set.first_name = registration.first_name;
         if (registration.last_name)  updateDoc.$set.last_name  = registration.last_name;
         if (registration.phone)      updateDoc.$set.phone      = registration.phone;
-        if (registration.memberID)   updateDoc.$set.memberID      = registration.memberID;
+        if (registration.memberID)   updateDoc.$set.memberID   = registration.memberID;
 
         await this._registration.updateOne({_id: new ObjectId(id)}, updateDoc);
         return this._registration.findOne({_id: new ObjectId(id)});
