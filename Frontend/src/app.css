@@ -29,7 +29,7 @@ html {
     html {
         /* http://bg.siteorigin.com/ */
         background-color: lightgrey;
-        background-image: url(img/background.png);
+        background-image: url(img/hintergrund.jpg);
         font-size: 11pt;
     }
 
@@ -39,7 +39,7 @@ html {
         margin-top: 2em;
         margin-bottom: 2em;
 
-        border: 1px solid #202020;
+        border: 1px solid #71383a;
         box-shadow: 1px 1px 3px rgba(0,0,0, 0.5);
 
     }
@@ -49,10 +49,10 @@ html {
 nav {
     user-select: none;
 
-    background-color: #404040;
+    background-color: #71383a;
     color: white;
 
-    border: 0px solid #202020;
+    border: 0px solid #58282a;
     border-bottom-width: 3px;
 }
 
@@ -83,15 +83,15 @@ nav ul {
 }
 
 nav li.active {
-    background-color: #333333;
-    border: 0px solid #097770;
+    background-color: #58282a;
+    border: 0px solid #88d3b8;
     border-bottom-width: 3px;
 }
 
 nav li:hover {
-    background-color: #505050;
+    background-color: #d7bd91;
 
-    border: 0px solid #097700;
+    border: 0px solid #88d3b8;
     border-bottom-width: 3px;
     cursor: pointer;
 }
