@@ -13,7 +13,7 @@ export default class RegistrationService {
      * Konstruktor.
      */
     constructor() {
-        this._registration = DatabaseFactory.database.collection("registrationlist");
+        this._registrations = DatabaseFactory.database.collection("registrations");
     }
 
     /**
@@ -26,7 +26,7 @@ export default class RegistrationService {
      * @return {Promise} Liste der gefundenen Anmeldungen
      */
     async search(query) {
-        let cursor = this._registration.find(query, {
+        let cursor = this._registrations.find(query, {
             sort: {
                 first_name: 1,
                 last_name: 1,
@@ -43,17 +43,17 @@ export default class RegistrationService {
      * @return {Promise} Gespeicherte Anmeldedaten
      */
     async create(registration) {
-        r = registration || {};
+        registration = registration || {};
 
         let newRegistration = {
             first_name:  registration.first_name || "",
             last_name:   registration.last_name  || "",
             phone:       registration.phone      || "",
-            memberID:    registration.memberID      || "",
+            member_ID:    registration.member_ID      || "",
         };
 
-        let result = await this._registration.insertOne(newRegistration);
-        return await this._registration.findOne({_id: result.insertedId});
+        let result = await this._registrations.insertOne(newRegistration);
+        return await this._registrations.findOne({_id: result.insertedId});
     }
 
     /**
@@ -63,7 +63,7 @@ export default class RegistrationService {
      * @return {Promise} Gefundene Anmeldedaten
      */
     async read(id) {
-        let result = await this._registration.findOne({_id: new ObjectId(id)});
+        let result = await this._registrations.findOne({_id: new ObjectId(id)});
         return result;
     }
 
@@ -76,7 +76,7 @@ export default class RegistrationService {
      * @return {Promise} Gespeicherte Anmeldung oder undefined
      */
     async update(id, registration) {
-        let oldRegistration = await this._registration.findOne({_id: new ObjectId(id)});
+        let oldRegistration = await this._registrations.findOne({_id: new ObjectId(id)});
         if (!oldRegistration) return;
 
         let updateDoc = {
@@ -86,10 +86,10 @@ export default class RegistrationService {
         if (registration.first_name) updateDoc.$set.first_name = registration.first_name;
         if (registration.last_name)  updateDoc.$set.last_name  = registration.last_name;
         if (registration.phone)      updateDoc.$set.phone      = registration.phone;
-        if (registration.memberID)   updateDoc.$set.memberID   = registration.memberID;
+        if (registration.member_ID)  updateDoc.$set.member_ID   = registration.member_ID;
 
-        await this._registration.updateOne({_id: new ObjectId(id)}, updateDoc);
-        return this._registration.findOne({_id: new ObjectId(id)});
+        await this._registrations.updateOne({_id: new ObjectId(id)}, updateDoc);
+        return this._registrations.findOne({_id: new ObjectId(id)});
     }
 
     /**
@@ -99,7 +99,7 @@ export default class RegistrationService {
      * @return {Promise} Anzahl der gelöschten Datensätze
      */
     async delete(id) {
-        let result = await this._registration.deleteOne({_id: new ObjectId(id)});
+        let result = await this._registrations.deleteOne({_id: new ObjectId(id)});
         return result.deletedCount;
     }
 }

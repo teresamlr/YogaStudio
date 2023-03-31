@@ -101,7 +101,7 @@ new ReviewController(server, "/review");
 server.listen(config.port, config.host, function() {
     console.log();
     console.log("=================");
-    console.log("Registration-Server");
+    console.log("MyApp-Server");
     console.log("=================");
     console.log();
     console.log("Ausführung mit folgender Konfiguration:");

@@ -20,7 +20,7 @@ class DatabaseFactory {
         // Datenbankverbindung herstellen
         this.client = new MongoClient(connectionUrl);
         await this.client.connect();
-        this.database = this.client.db("registrationlist");
+        this.database = this.client.db("app_database");
 
         await this._createDemoData();
     }
@@ -31,39 +31,39 @@ class DatabaseFactory {
      * wenigstens gleich ein paar Daten.
      */
     async _createDemoData() {
-        let registration = this.database.collection("registrationlist");
+        let examples = this.database.collection("example");
 
-        if (await registration.estimatedDocumentCount() === 0) {
-            registration.insertMany([
+        if (await examples.estimatedDocumentCount() === 0) {
+            examples.insertMany([
                 {
                     first_name: "Teresa",
                     last_name: "Müller",
                     phone: "+49 123 456789",
-                    memberID: "0",
+                    member_ID: "0",
                 },
                 {
                     first_name: "Michael",
                     last_name: "Knight",
                     phone: "+49 721 554194",
-                    memberID: "michael@knight-rider.com",
+                    member_ID: "michael@knight-rider.com",
                 },
                 {
                     first_name: "Fox",
                     last_name: "Mulder",
                     phone: "+49 721 553181",
-                    memberID: "mulder@xfiles.com",
+                    member_ID: "mulder@xfiles.com",
                 },
                 {
                     first_name: "Dana",
                     last_name: "Scully",
                     phone: "+49 721 572287",
-                    memberID: "scully@xfiles.com",
+                    member_ID: "scully@xfiles.com",
                 },
                 {
                     first_name: "Elwood",
                     last_name: "Blues",
                     phone: "+49 721 957338",
-                    memberID: "elwood@blues-brothers.com",
+                    member_ID: "elwood@blues-brothers.com",
                 },
             ]);
         }
