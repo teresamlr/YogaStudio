@@ -60,7 +60,7 @@ class DatabaseFactory {
         }
     }
 
-    /** 
+    /** Bewertungen
     async init(connectionUrl) {
         // Datenbankverbindung herstellen
         this.client = new MongoClient(connectionUrl);
@@ -93,6 +93,45 @@ class DatabaseFactory {
     }
     */
     
+    /** Kurstliste
+    async init(connectionUrl) {
+        // Datenbankverbindung herstellen
+        this.client = new MongoClient(connectionUrl);
+        await this.client.connect();
+        this.database = this.client.db("courselist");
+
+        await this._createDemoData();
+    }
+
+    async _createDemoData() {
+        let courses = this.database.collection("course");
+
+        if (await courses.estimatedDocumentCount() === 0) {
+            reviews.insertMany([
+                {
+                    course_name: "Yoga für Fortgeschrittene",
+                    description: "",
+                    date: "Samstag, 19 Uhr"
+                },
+                {
+                    course_name: "Yoga für Anfänger",
+                    description: "",
+                    date: "Montag und Mittwoch, 18 Uhr"
+                },
+                {
+                    course_name: "Weekend Flow",
+                    description: "",
+                    date: "Samstag und Sonntag, 10 Uhr"
+                },
+                {
+                    course_name: "Functional Yoga",
+                    description: "",
+                    date: "Freitag, 12 Uhr"
+                }
+            ]);
+        }
+    }
+    */
 }
 
 export default new DatabaseFactory();
