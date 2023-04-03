@@ -21,7 +21,6 @@ class DatabaseFactory {
         this.client = new MongoClient(connectionUrl);
         await this.client.connect();
         this.database = this.client.db("registrationlist");
-        this.database = this.client.db("reviewlist");
 
         await this._createDemoData();
     }
@@ -59,7 +58,18 @@ class DatabaseFactory {
                 }
             ]);
         }
+    }
 
+    async init(connectionUrl) {
+        // Datenbankverbindung herstellen
+        this.client = new MongoClient(connectionUrl);
+        await this.client.connect();
+        this.database = this.client.db("reviewlist");
+
+        await this._createDemoData();
+    }
+
+    async _createDemoData() {
         let reviews = this.database.collection("review");
 
         if (await reviews.estimatedDocumentCount() === 0) {
@@ -74,11 +84,13 @@ class DatabaseFactory {
                     first_name: "Erika",
                     last_name: "Mustermann",
                     course_name: "Weekend Flow",
-                    text: "Sehr gut auch für Einsteiger. Die Trainerin ist sehr kompetent."
-                }
+                    text: "Auch super für Einsteiger. Die Trainerin ist sehr kompetent."
+                },
+
             ]);
         }
     }
+    
 }
 
 export default new DatabaseFactory();
