@@ -4,7 +4,7 @@ import Page from "../page.js";
 import HtmlTemplate from "./page-edit-review.html";
 
 /**
- * Klasse PageEdit: Stellt die Seite zum Anlegen oder Bearbeiten einer Bewertung
+ * Klasse PageEditReview: Stellt die Seite zum Anlegen oder Bearbeiten einer Bewertung
  * zur Verfügung.
  */
 export default class PageEdit extends Page {
@@ -55,7 +55,7 @@ export default class PageEdit extends Page {
 
         // Bearbeiteten Datensatz laden
         if (this._editId) {
-            this._url = `/registration/${this._editId}`;
+            this._url = `/review/${this._editId}`;
             this._dataset = await this._app.backend.fetch("GET", this._url);
             this._title = `${this._dataset.first_name} ${this._dataset.last_name}`;
         } else {
