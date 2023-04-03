@@ -60,6 +60,7 @@ class DatabaseFactory {
         }
     }
 
+    /** 
     async init(connectionUrl) {
         // Datenbankverbindung herstellen
         this.client = new MongoClient(connectionUrl);
@@ -90,6 +91,7 @@ class DatabaseFactory {
             ]);
         }
     }
+    */
     
 }
 
