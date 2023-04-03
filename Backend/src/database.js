@@ -21,6 +21,7 @@ class DatabaseFactory {
         this.client = new MongoClient(connectionUrl);
         await this.client.connect();
         this.database = this.client.db("registrationlist");
+        this.database = this.client.db("reviewlist");
 
         await this._createDemoData();
     }
@@ -55,6 +56,25 @@ class DatabaseFactory {
                     course_name: "Functional Yoga",
                     phone: "+49 135 791357",
                     memberID: "37",
+                }
+            ]);
+        }
+
+        let reviews = this.database.collection("review");
+
+        if (await reviews.estimatedDocumentCount() === 0) {
+            reviews.insertMany([
+                {
+                    first_name: "Max",
+                    last_name: "Mustermann",
+                    course_name: "Yoga für Fortgeschrittene",
+                    text: "Tolle Atmosphäre und sehr nette Leute."
+                },
+                {
+                    first_name: "Erika",
+                    last_name: "Mustermann",
+                    course_name: "Weekend Flow",
+                    text: "Sehr gut auch für Einsteiger. Die Trainerin ist sehr kompetent."
                 }
             ]);
         }
