@@ -4,7 +4,7 @@ import Page from "../page.js";
 import HtmlTemplate from "./page-edit.html";
 
 /**
- * Klasse PageEdit: Stellt die Seite zum Anlegen oder Bearbeiten einer Anmeldung
+ * Klasse PageEdit: Stellt die Seite zum Anlegen oder Bearbeiten einer Adresse
  * zur Verfügung.
  */
 export default class PageEdit extends Page {
@@ -23,15 +23,17 @@ export default class PageEdit extends Page {
         this._dataset = {
             first_name: "",
             last_name: "",
+            course_name: "",
             phone: "",
             memberID: "",
         };
 
         // Eingabefelder
-        this._firstNameInput = null;
-        this._lastNameInput  = null;
-        this._phoneInput     = null;
-        this._memberIDInput     = null;
+        this._firstNameInput  = null;
+        this._lastNameInput   = null;
+        this._courseNameInput = null;
+        this._phoneInput      = null;
+        this._memberIDInput   = null;
     }
 
     /**
@@ -67,6 +69,7 @@ export default class PageEdit extends Page {
         let html = this._mainElement.innerHTML;
         html = html.replace("$LAST_NAME$", this._dataset.last_name);
         html = html.replace("$FIRST_NAME$", this._dataset.first_name);
+        html = html.replace("$COURSENAME$", this._dataset.course_name);
         html = html.replace("$PHONE$", this._dataset.phone);
         html = html.replace("$MEMBERID$", this._dataset.memberID);
         this._mainElement.innerHTML = html;
@@ -76,10 +79,11 @@ export default class PageEdit extends Page {
         saveButton.addEventListener("click", () => this._saveAndExit());
 
         // Eingabefelder zur späteren Verwendung merken
-        this._firstNameInput = this._mainElement.querySelector("input.first_name");
-        this._lastNameInput  = this._mainElement.querySelector("input.last_name");
-        this._phoneInput     = this._mainElement.querySelector("input.phone");
-        this._memberIDInput     = this._mainElement.querySelector("input.memberID");
+        this._firstNameInput  = this._mainElement.querySelector("input.first_name");
+        this._lastNameInput   = this._mainElement.querySelector("input.last_name");
+        this._courseNameInput = this._mainElement.querySelector("input.course_name");
+        this._phoneInput      = this._mainElement.querySelector("input.phone");
+        this._memberIDInput   = this._mainElement.querySelector("input.memberID");
     }
 
     /**
@@ -88,11 +92,12 @@ export default class PageEdit extends Page {
      */
     async _saveAndExit() {
         // Eingegebene Werte prüfen
-        this._dataset._id        = this._editId;
-        this._dataset.first_name = this._firstNameInput.value.trim();
-        this._dataset.last_name  = this._lastNameInput.value.trim();
-        this._dataset.phone      = this._phoneInput.value.trim();
-        this._dataset.memberID      = this._memberIDInput.value.trim();
+        this._dataset._id         = this._editId;
+        this._dataset.first_name  = this._firstNameInput.value.trim();
+        this._dataset.last_name   = this._lastNameInput.value.trim();
+        this._dataset.course_name = this._courseNameInput.value.trim();
+        this._dataset.phone       = this._phoneInput.value.trim();
+        this._dataset.memberID    = this._memberIDInput.value.trim();
 
         if (!this._dataset.first_name) {
             alert("Geben Sie erst einen Vornamen ein.");

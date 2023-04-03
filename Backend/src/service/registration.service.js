@@ -46,10 +46,11 @@ export default class RegistrationService {
         registration = registration || {};
 
         let newRegistration = {
-            first_name:  registration.first_name || "",
-            last_name:   registration.last_name  || "",
-            phone:       registration.phone      || "",
-            member_ID:    registration.member_ID      || "",
+            first_name:  registration.first_name  || "",
+            last_name:   registration.last_name   || "",
+            course_name: registration.course_name || "",
+            phone:       registration.phone       || "",
+            memberID:    registration.memberID    || "",
         };
 
         let result = await this._registrations.insertOne(newRegistration);
@@ -83,10 +84,11 @@ export default class RegistrationService {
             $set: {},
         }
 
-        if (registration.first_name) updateDoc.$set.first_name = registration.first_name;
-        if (registration.last_name)  updateDoc.$set.last_name  = registration.last_name;
-        if (registration.phone)      updateDoc.$set.phone      = registration.phone;
-        if (registration.member_ID)  updateDoc.$set.member_ID   = registration.member_ID;
+        if (registration.first_name)  updateDoc.$set.first_name  = registration.first_name;
+        if (registration.last_name)   updateDoc.$set.last_name   = registration.last_name;
+        if (registration.course_name) updateDoc.$set.course_name = registration.course_name;
+        if (registration.phone)       updateDoc.$set.phone       = registration.phone;
+        if (registration.memberID)    updateDoc.$set.memberID    = registration.memberID;
 
         await this._registrations.updateOne({_id: new ObjectId(id)}, updateDoc);
         return this._registrations.findOne({_id: new ObjectId(id)});

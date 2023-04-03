@@ -62,7 +62,7 @@ export default class RegistrationController {
     }
 
     /**
-     * POST /member
+     * POST /registration
      * Neue Anmeldung anlegen
      */
     async create(req, res, next) {
@@ -122,3 +122,4 @@ export default class RegistrationController {
         return next();
     }
 }
+

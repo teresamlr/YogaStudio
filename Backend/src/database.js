@@ -20,7 +20,7 @@ class DatabaseFactory {
         // Datenbankverbindung herstellen
         this.client = new MongoClient(connectionUrl);
         await this.client.connect();
-        this.database = this.client.db("app_database");
+        this.database = this.client.db("registrationlist");
 
         await this._createDemoData();
     }
@@ -38,37 +38,69 @@ class DatabaseFactory {
                 {
                     first_name: "Teresa",
                     last_name: "Müller",
+                    course_name: "Yoga für Fortgeschrittene",
                     phone: "+49 123 456789",
-                    member_ID: "0",
+                    memberID: "222",
                 },
                 {
-                    first_name: "Michael",
-                    last_name: "Knight",
-                    phone: "+49 721 554194",
-                    member_ID: "michael@knight-rider.com",
+                    first_name: "Lisa",
+                    last_name: "Huck",
+                    course_name: "Weekend Flow",
+                    phone: "+49 123 123123",
+                    memberID: "875",
                 },
                 {
-                    first_name: "Fox",
-                    last_name: "Mulder",
-                    phone: "+49 721 553181",
-                    member_ID: "mulder@xfiles.com",
+                    first_name: "Rebecca",
+                    last_name: "Denz",
+                    course_name: "Functional Yoga",
+                    phone: "+49 135 791357",
+                    memberID: "37",
+                }
+            ]);
+        }
+    }
+
+    /**
+     * Ersatz für den Konstruktor, damit aus dem Hauptprogramm heraus die
+     * Verbindungs-URL der MongoDB übergeben werden kann. Hier wird dann
+     * auch gleich die Verbindung hergestellt.
+     *
+     * @param {String} connectionUrl URL-String mit den Verbindungsdaten
+     */
+    async init(connectionUrl) {
+        // Datenbankverbindung herstellen
+        this.client = new MongoClient(connectionUrl);
+        await this.client.connect();
+        this.database = this.client.db("reviewlist");
+
+        await this._createDemoData();
+    }
+
+    /**
+     * Hilfsmethode zum Anlegen von Demodaten. Würde man so in einer
+     * Produktivanwendung natürlich nicht machen, aber so sehen wir
+     * wenigstens gleich ein paar Daten.
+     */
+    async _createDemoData() {
+        let registrations = this.database.collection("review");
+
+        if (await registrations.estimatedDocumentCount() === 0) {
+            registrations.insertMany([
+                {
+                    first_name: "Max",
+                    last_name: "Mustermann",
+                    course_name: "Yoga für Fortgeschrittene",
+                    text: ""
                 },
                 {
-                    first_name: "Dana",
-                    last_name: "Scully",
-                    phone: "+49 721 572287",
-                    member_ID: "scully@xfiles.com",
-                },
-                {
-                    first_name: "Elwood",
-                    last_name: "Blues",
-                    phone: "+49 721 957338",
-                    member_ID: "elwood@blues-brothers.com",
-                },
+                    first_name: "Erika",
+                    last_name: "Mustermann",
+                    course_name: "Weekend Flow",
+                    text: ""
+                }
             ]);
         }
     }
 }
 
 export default new DatabaseFactory();
-
