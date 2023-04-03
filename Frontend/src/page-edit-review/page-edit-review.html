@@ -1,0 +1,68 @@
+<!-- Stylesheet der Seite -->
+<style>
+    /* FORMULARFELDER */
+    main {
+        background-color: #fadfb0;
+        padding: 1em;
+    }
+
+    main .form > * {
+        display: block;
+        width: 100%;
+
+        border: 0px solid #c4a671;
+        border-bottom-width: 1px;
+
+        padding: 0.5em 0 0.5em 0.7em;
+        margin-bottom: 1em;
+        border-radius: 18px;
+    }
+
+    /* AKTIONSBUTTONS */
+    main .actions {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    main .actions > div {
+        padding: 0.5em;
+        margin: 1em;
+        border-radius: 18px;
+
+        background-color: white;
+        transition: background-color 0.3s;
+
+        flex: 1;
+        text-align: center;
+    }
+
+    main .actions > div:first-child {
+        margin-left: 0;
+    }
+
+    main .actions > div:last-child {
+        margin-right: 0;
+    }
+
+    main .actions > div:hover {
+        background-color: #88d3b8;
+        cursor: pointer;
+    }
+</style>
+
+<!-- Inhalt der Seite -->
+<main>
+    <div>
+        <div class="form">
+            <input class="first_name" placeholder="Vorname" value="$FIRST_NAME$" />
+            <input class="last_name" placeholder="Nachname" value="$LAST_NAME$" />
+            <input class="course_name" placeholder="Kurs" value="$COURSE_NAME$" />
+            <input class="text" placeholder="Text" value="$TEXT$" />
+        </div>
+        <div class="actions">
+            <div class="action save">
+                <a>Speichern</a>
+            </div>
+        </div>
+    </div>
+</main>

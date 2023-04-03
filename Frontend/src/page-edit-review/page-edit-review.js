@@ -1,10 +1,10 @@
 "use strict";
 
 import Page from "../page.js";
-import HtmlTemplate from "./page-edit.html";
+import HtmlTemplate from "./page-edit-review.html";
 
 /**
- * Klasse PageEdit: Stellt die Seite zum Anlegen oder Bearbeiten einer Anmeldung
+ * Klasse PageEdit: Stellt die Seite zum Anlegen oder Bearbeiten einer Bewertung
  * zur Verfügung.
  */
 export default class PageEdit extends Page {
@@ -24,16 +24,14 @@ export default class PageEdit extends Page {
             first_name: "",
             last_name: "",
             course_name: "",
-            phone: "",
-            memberID: "",
+            text: "",
         };
 
         // Eingabefelder
         this._firstNameInput  = null;
         this._lastNameInput   = null;
         this._courseNameInput = null;
-        this._phoneInput      = null;
-        this._memberIDInput   = null;
+        this._textInput       = null;
     }
 
     /**
@@ -61,8 +59,8 @@ export default class PageEdit extends Page {
             this._dataset = await this._app.backend.fetch("GET", this._url);
             this._title = `${this._dataset.first_name} ${this._dataset.last_name}`;
         } else {
-            this._url = `/registration`;
-            this._title = "Anmeldung hinzufügen";
+            this._url = `/review`;
+            this._title = "Bewertung hinzufügen";
         }
 
         // Platzhalter im HTML-Code ersetzen
@@ -70,8 +68,7 @@ export default class PageEdit extends Page {
         html = html.replace("$LAST_NAME$", this._dataset.last_name);
         html = html.replace("$FIRST_NAME$", this._dataset.first_name);
         html = html.replace("$COURSE_NAME$", this._dataset.course_name);
-        html = html.replace("$PHONE$", this._dataset.phone);
-        html = html.replace("$MEMBERID$", this._dataset.memberID);
+        html = html.replace("$TEXT$", this._dataset.text);
         this._mainElement.innerHTML = html;
 
         // Event Listener registrieren
@@ -82,8 +79,7 @@ export default class PageEdit extends Page {
         this._firstNameInput  = this._mainElement.querySelector("input.first_name");
         this._lastNameInput   = this._mainElement.querySelector("input.last_name");
         this._courseNameInput = this._mainElement.querySelector("input.course_name");
-        this._phoneInput      = this._mainElement.querySelector("input.phone");
-        this._memberIDInput   = this._mainElement.querySelector("input.memberID");
+        this._textInput       = this._mainElement.querySelector("input.text");
     }
 
     /**
@@ -96,8 +92,7 @@ export default class PageEdit extends Page {
         this._dataset.first_name  = this._firstNameInput.value.trim();
         this._dataset.last_name   = this._lastNameInput.value.trim();
         this._dataset.course_name = this._courseNameInput.value.trim();
-        this._dataset.phone       = this._phoneInput.value.trim();
-        this._dataset.memberID    = this._memberIDInput.value.trim();
+        this._dataset.text        = this._textInput.value.trim();
 
         if (!this._dataset.first_name) {
             alert("Geben Sie erst einen Vornamen ein.");
