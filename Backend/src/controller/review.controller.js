@@ -5,11 +5,11 @@ import {wrapHandler} from "../utils.js";
 import RestifyError from "restify-errors";
 
 /**
- * HTTP-Controller-Klasse für Kursanmeldungen. Diese Klasse registriert
+ * HTTP-Controller-Klasse für Bewertungen. Diese Klasse registriert
  * alle notwendigen URL-Handler beim Webserver für einen einfachen REST-
- * Webservice zum Lesen und Schreiben von Anmeldungen.
+ * Webservice zum Lesen und Schreiben von Bewertungen.
  */
-export default class RegistrationController {
+export default class ReviewController {
     /**
      * Konstruktor. Hier werden die URL-Handler registrert.
      *
@@ -17,10 +17,10 @@ export default class RegistrationController {
      * @param {String} prefix Gemeinsamer Prefix aller URLs
      */
     constructor(server, prefix) {
-        this._service = new RegistrationService();
+        this._service = new ReviewService();
         this._prefix = prefix;
 
-        // Collection: Anmeldungen
+        // Collection: Bewertung 
         server.get(prefix, wrapHandler(this, this.search));
         server.post(prefix, wrapHandler(this, this.create));
 
@@ -51,8 +51,8 @@ export default class RegistrationController {
     }
 
     /**
-     * GET /registration
-     * Anmeldung suchen
+     * GET /review
+     * Bewertung suchen
      */
     async search(req, res, next) {
         let result = await this._service.search(req.query);
@@ -62,8 +62,8 @@ export default class RegistrationController {
     }
 
     /**
-     * POST /registration
-     * Neue Anmeldung anlegen
+     * POST /review
+     * Neue Bewertung anlegen
      */
     async create(req, res, next) {
         let result = await this._service.create(req.body);
@@ -77,8 +77,8 @@ export default class RegistrationController {
     }
 
     /**
-     * GET /registration/:id
-     * Anmeldungen auslesen
+     * GET /review/:id
+     * Bewertungen auslesen
      */
     async read(req, res, next) {
         let result = await this._service.read(req.params.id);
@@ -87,16 +87,16 @@ export default class RegistrationController {
             this._insertHateoasLinks(result);
             res.send(result);
         } else {
-            throw new RestifyError.NotFoundError("Anmeldung nicht gefunden");
+            throw new RestifyError.NotFoundError("Bewertung nicht gefunden");
         }
 
         return next();
     }
 
     /**
-     * PUT /registration/:id
-     * PATCH /registration/:id
-     * Anmdeldung ändern
+     * PUT /review/:id
+     * PATCH /review/:id
+     * Bewertung ändern
      */
     async update(req, res, next) {
         let result = await this._service.update(req.params.id, req.body);
@@ -105,15 +105,15 @@ export default class RegistrationController {
             this._insertHateoasLinks(result);
             res.send(result);
         } else {
-            throw new RestifyError.NotFoundError("Anmeldung nicht gefunden");
+            throw new RestifyError.NotFoundError("Bewertung nicht gefunden");
         }
 
         return next();
     }
 
     /**
-     * DELETE /registration/:id
-     * Anmeldung löschen
+     * DELETE /review/:id
+     * Bewertung löschen
      */
     async delete(req, res, next) {
         await this._service.delete(req.params.id)

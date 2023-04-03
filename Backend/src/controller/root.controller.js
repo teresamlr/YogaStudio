@@ -41,6 +41,18 @@ export default class RootController {
         next();
     }
 
+    async index(req, res, next) {
+        res.sendResult([
+            {
+                _name: "review",
+                query: {url: "/review", method: "GET", query_params: ["search", "first_name", "last_name", "course_name", "text"]},
+                create: {url: "/review", method: "POST"},
+            }
+        ]);
+
+        next();
+    }
+
     /**
      * GET /openapi.yaml:
      * Abruf der OpenAPI-Spezifikation
