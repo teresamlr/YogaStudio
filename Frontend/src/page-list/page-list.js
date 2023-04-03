@@ -61,6 +61,7 @@ export default class PageList extends Page {
             html = html.replace("$ID$", dataset._id);
             html = html.replace("$LAST_NAME$", dataset.last_name);
             html = html.replace("$FIRST_NAME$", dataset.first_name);
+            html = html.replace("$COURSE_NAME$", dataset.course_name);
             html = html.replace("$PHONE$", dataset.phone);
             html = html.replace("$MEMBERID$", dataset.memberID);
 
@@ -78,8 +79,8 @@ export default class PageList extends Page {
     }
 
     /**
-     * Löschen der übergebenen Adresse. Zeigt einen Popup, ob der Anwender
-     * die Adresse löschen will und löscht diese dann.
+     * Löschen der übergebenen Anmeldung. Zeigt einen Popup, ob der Anwender
+     * die Anmeldung löschen will und löscht diese dann.
      *
      * @param {Integer} id ID des zu löschenden Datensatzes
      */
