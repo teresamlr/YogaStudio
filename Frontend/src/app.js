@@ -32,11 +32,20 @@ class App {
                 url: "^/edit/(.*)$",
                 show: matches => this._gotoEdit(matches[1]),
             },{
-                url: ".*",
-                show: () => this._gotoList()
-            },{
+                url: "^/review$",
+                show: () => this._gotoListReview()
+            },
+            {
                 url: "^/newreview/$",
                 show: () => this._gotoNewReview()
+            }, {
+                url: "^/course$",
+                show: () => this._gotoListCourse()
+            },
+            
+            {            
+                url: ".*",
+                show: () => this._gotoList()
             }
         ]);
 
@@ -75,6 +84,32 @@ class App {
             let page = new PageList(this);
             await page.init();
             this._showPage(page, "list");
+        } catch (ex) {
+            this.showException(ex);
+        }
+    }
+
+    async _gotoListReview() {
+        try {
+            // Dynamischer Import, vgl. https://javascript.info/modules-dynamic-imports
+            let {default: PageList} = await import("./page-list-review/page-list-review.js");
+
+            let page = new PageList(this);
+            await page.init();
+            this._showPage(page, "list-review");
+        } catch (ex) {
+            this.showException(ex);
+        }
+    }
+
+    async _gotoListCourse() {
+        try {
+            // Dynamischer Import, vgl. https://javascript.info/modules-dynamic-imports
+            let {default: PageList} = await import("./page-list-course/page-list-course.js");
+
+            let page = new PageList(this);
+            await page.init();
+            this._showPage(page, "list-course");
         } catch (ex) {
             this.showException(ex);
         }
