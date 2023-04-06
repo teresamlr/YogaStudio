@@ -34,7 +34,10 @@ class App {
             },{
                 url: ".*",
                 show: () => this._gotoList()
-            },
+            },{
+                url: "^/newreview/$",
+                show: () => this._gotoNewReview()
+            }
         ]);
 
         // Fenstertitel merken, um später den Name der aktuellen Seite anzuhängen
@@ -108,6 +111,19 @@ class App {
             let page = new PageEdit(this, id);
             await page.init();
             this._showPage(page, "edit");
+        } catch (ex) {
+            this.showException(ex);
+        }
+    }
+
+    async _gotoNewReview() {
+        try {
+            // Dynamischer Import, vgl. https://javascript.info/modules-dynamic-imports
+            let {default: PageEditReview} = await import("./page-edit-review/page-edit-review.js");
+
+            let page = new PageEditReview(this);
+            await page.init();
+            this._showPage(page, "newreview");
         } catch (ex) {
             this.showException(ex);
         }

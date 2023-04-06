@@ -41,7 +41,7 @@ export default class RootController {
         next();
     }
 
-    async index(req, res, next) {
+    /** async index(req, res, next) {
         res.sendResult([
             {
                 _name: "review",
@@ -51,7 +51,7 @@ export default class RootController {
         ]);
 
         next();
-    }
+    } */
 
     /**
      * GET /openapi.yaml:

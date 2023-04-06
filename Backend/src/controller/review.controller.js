@@ -1,6 +1,6 @@
 "use strict"
 
-import RegistrationService from "../service/registration.service.js";
+import ReviewService from "../service/review.service.js";
 import {wrapHandler} from "../utils.js";
 import RestifyError from "restify-errors";
 

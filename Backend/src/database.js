@@ -20,7 +20,7 @@ class DatabaseFactory {
         // Datenbankverbindung herstellen
         this.client = new MongoClient(connectionUrl);
         await this.client.connect();
-        this.database = this.client.db("registrationlist");
+        this.database = this.client.db("appdatabase");
 
         await this._createDemoData();
     }
@@ -58,19 +58,7 @@ class DatabaseFactory {
                 }
             ]);
         }
-    }
 
-    /** Bewertungen
-    async init(connectionUrl) {
-        // Datenbankverbindung herstellen
-        this.client = new MongoClient(connectionUrl);
-        await this.client.connect();
-        this.database = this.client.db("reviewlist");
-
-        await this._createDemoData();
-    }
-
-    async _createDemoData() {
         let reviews = this.database.collection("review");
 
         if (await reviews.estimatedDocumentCount() === 0) {
@@ -90,24 +78,11 @@ class DatabaseFactory {
 
             ]);
         }
-    }
-    */
-    
-    /** Kurstliste
-    async init(connectionUrl) {
-        // Datenbankverbindung herstellen
-        this.client = new MongoClient(connectionUrl);
-        await this.client.connect();
-        this.database = this.client.db("courselist");
 
-        await this._createDemoData();
-    }
-
-    async _createDemoData() {
         let courses = this.database.collection("course");
 
         if (await courses.estimatedDocumentCount() === 0) {
-            reviews.insertMany([
+            courses.insertMany([
                 {
                     course_name: "Yoga für Fortgeschrittene",
                     description: "",
@@ -131,7 +106,6 @@ class DatabaseFactory {
             ]);
         }
     }
-    */
 }
 
 export default new DatabaseFactory();
