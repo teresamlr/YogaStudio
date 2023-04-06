@@ -5,9 +5,9 @@ import {wrapHandler} from "../utils.js";
 import RestifyError from "restify-errors";
 
 /**
- * HTTP-Controller-Klasse für Bewertungen. Diese Klasse registriert
+ * HTTP-Controller-Klasse für Kurse. Diese Klasse registriert
  * alle notwendigen URL-Handler beim Webserver für einen einfachen REST-
- * Webservice zum Lesen und Schreiben von Bewertungen.
+ * Webservice zum Lesen und Schreiben von Kursen.
  */
 export default class CourseController {
     /**
@@ -20,7 +20,7 @@ export default class CourseController {
         this._service = new CourseService();
         this._prefix = prefix;
 
-        // Collection: Bewertung 
+        // Collection: Kurs 
         server.get(prefix, wrapHandler(this, this.search));
         server.post(prefix, wrapHandler(this, this.create));
 
@@ -51,8 +51,8 @@ export default class CourseController {
     }
 
     /**
-     * GET /review
-     * Bewertung suchen
+     * GET /course
+     * Kurs suchen
      */
     async search(req, res, next) {
         let result = await this._service.search(req.query);
@@ -62,8 +62,8 @@ export default class CourseController {
     }
 
     /**
-     * POST /review
-     * Neue Bewertung anlegen
+     * POST /course
+     * Neuen Kurs anlegen
      */
     async create(req, res, next) {
         let result = await this._service.create(req.body);
@@ -77,8 +77,8 @@ export default class CourseController {
     }
 
     /**
-     * GET /review/:id
-     * Bewertungen auslesen
+     * GET /course/:id
+     * Kurse auslesen
      */
     async read(req, res, next) {
         let result = await this._service.read(req.params.id);
@@ -87,16 +87,16 @@ export default class CourseController {
             this._insertHateoasLinks(result);
             res.send(result);
         } else {
-            throw new RestifyError.NotFoundError("Bewertung nicht gefunden");
+            throw new RestifyError.NotFoundError("Kurs nicht gefunden");
         }
 
         return next();
     }
 
     /**
-     * PUT /review/:id
-     * PATCH /review/:id
-     * Bewertung ändern
+     * PUT /course/:id
+     * PATCH /course/:id
+     * Kurs ändern
      */
     async update(req, res, next) {
         let result = await this._service.update(req.params.id, req.body);
@@ -105,15 +105,15 @@ export default class CourseController {
             this._insertHateoasLinks(result);
             res.send(result);
         } else {
-            throw new RestifyError.NotFoundError("Bewertung nicht gefunden");
+            throw new RestifyError.NotFoundError("Kurs nicht gefunden");
         }
 
         return next();
     }
 
     /**
-     * DELETE /review/:id
-     * Bewertung löschen
+     * DELETE /course/:id
+     * Kurs löschen
      */
     async delete(req, res, next) {
         await this._service.delete(req.params.id)

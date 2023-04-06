@@ -4,9 +4,9 @@ import DatabaseFactory from "../database.js";
 import {ObjectId} from "mongodb";
 
 /**
- * Geschäftslogik zur Verwaltung von Bewertungen. Diese Klasse implementiert die
+ * Geschäftslogik zur Verwaltung von Kursen. Diese Klasse implementiert die
  * eigentliche Anwendungslogik losgelöst vom technischen Übertragungsweg.
- * Die Bewertungen werden in einer MongoDB abgelegt.
+ * Die Kurse werden in einer MongoDB abgelegt.
  */
 export default class CourseService {
     /**
@@ -17,19 +17,18 @@ export default class CourseService {
     }
 
     /**
-     * Bewertung suchen. Unterstützt wird lediglich eine ganz einfache Suche,
+     * Kurs suchen. Unterstützt wird lediglich eine ganz einfache Suche,
      * bei der einzelne Felder auf exakte Übereinstimmung geprüft werden.
      * Zwar unterstützt MongoDB prinzipiell beliebig komplexe Suchanfragen.
      * Um das Beispiel klein zu halten, wird dies hier aber nicht unterstützt.
      *
      * @param {Object} query Optionale Suchparameter
-     * @return {Promise} Liste der gefundenen Bewertungen
+     * @return {Promise} Liste der gefundenen Kurse
      */
     async search(query) {
         let cursor = this._courses.find(query, {
             sort: {
-                first_name: 1,
-                last_name: 1,
+                course_name: 1,
             }
         });
 
@@ -37,10 +36,10 @@ export default class CourseService {
     }
 
     /**
-     * Speichern einer neuen Bewertung.
+     * Speichern eines neuen Kurses.
      *
-     * @param {Object} course Zu speichernde Bewertungsdaten
-     * @return {Promise} Gespeicherte Bewertungsdaten
+     * @param {Object} course Zu speichernde Kursdaten
+     * @return {Promise} Gespeicherte Kursdaten
      */
     async create(course) {
         course = course || {};
@@ -56,10 +55,10 @@ export default class CourseService {
     }
 
     /**
-     * Auslesen einer vorhandenen Bewertung anhand ihrer ID.
+     * Auslesen eines vorhandenen Kurses anhand ihrer ID.
      *
-     * @param {String} id ID der gesuchten Bewertung
-     * @return {Promise} Gefundene Bewertungsdaten
+     * @param {String} id ID des gesuchten Kurses
+     * @return {Promise} Gefundene Kursdaten
      */
     async read(id) {
         let result = await this._courses.findOne({_id: new ObjectId(id)});
@@ -67,12 +66,12 @@ export default class CourseService {
     }
 
     /**
-     * Aktualisierung einer Bewertung, durch Überschreiben einzelner Felder
-     * oder des gesamten Bewertungsobjekts (ohne die ID).
+     * Aktualisierung eines Kurses, durch Überschreiben einzelner Felder
+     * oder des gesamten Kursobjekts (ohne die ID).
      *
-     * @param {String} id ID der gesuchten Bewertung
-     * @param {[type]} course Zu speichernde Bewertung
-     * @return {Promise} Gespeicherte Bewertung oder undefined
+     * @param {String} id ID des gesuchten Kurses
+     * @param {[type]} course Zu speichernder Kurs
+     * @return {Promise} Gespeicherter Kurs oder undefined
      */
     async update(id, course) {
         let oldCourse = await this._courses.findOne({_id: new ObjectId(id)});
@@ -93,9 +92,9 @@ export default class CourseService {
     }
 
     /**
-     * Löschen einer Bewertung anhand ihrer ID.
+     * Löschen eines Kurses anhand seiner ID.
      *
-     * @param {String} id ID der gesuchten Bewertung
+     * @param {String} id ID des gesuchten Kurses
      * @return {Promise} Anzahl der gelöschten Datensätze
      */
     async delete(id) {

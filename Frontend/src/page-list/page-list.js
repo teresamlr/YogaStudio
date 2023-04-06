@@ -36,7 +36,7 @@ export default class PageList extends Page {
     async init() {
         // HTML-Inhalt nachladen
         await super.init();
-        this._title = "Übersicht";
+        this._title = "Anmeldungen";
 
         // Platzhalter anzeigen, wenn noch keine Daten vorhanden sind
         let data = await this._app.backend.fetch("GET", "/registration");
