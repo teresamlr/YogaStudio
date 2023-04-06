@@ -85,22 +85,22 @@ class DatabaseFactory {
             courses.insertMany([
                 {
                     course_name: "Yoga für Fortgeschrittene",
-                    description: "",
+                    description: "Willkommen zu unserem Yoga-Kurs für Fortgeschrittene! Dieser Kurs richtet sich an Teilnehmer, die bereits über ein solides Verständnis der Grundlagen des Yoga verfügen und ihre Praxis auf die nächste Stufe bringen möchten.",
                     date: "Samstag, 19 Uhr"
                 },
                 {
                     course_name: "Yoga für Anfänger",
-                    description: "",
+                    description: "Willkommen zu unserem Yoga-Kurs für Anfänger! Dieser Kurs ist für alle gedacht, die Yoga kennenlernen und seine Vorteile für Körper und Geist erfahren möchten.",
                     date: "Montag und Mittwoch, 18 Uhr"
                 },
                 {
                     course_name: "Weekend Flow",
-                    description: "",
+                    description: "Willkommen zu unserem Weekend Flow Yoga-Kurs! Dieser Kurs ist perfekt für alle, die ihre Praxis am Wochende vertiefen und Ihre Energie wieder aufladen möchten.",
                     date: "Samstag und Sonntag, 10 Uhr"
                 },
                 {
                     course_name: "Functional Yoga",
-                    description: "",
+                    description: "Willkommen zu unserem Functional-Yoga-Kurs! Dieser Kurs kombiniert die Grundlagen des Yoga mit funktionalen Übungen, um Ihnen zu helfen, Ihre Kraft, Flexibilität und Mobilität zu verbessern und gleichzeitig Ihre Körperhaltung und Stabilität zu fördern.",
                     date: "Freitag, 12 Uhr"
                 }
             ]);
