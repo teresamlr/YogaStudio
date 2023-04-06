@@ -40,21 +40,21 @@ class DatabaseFactory {
                     last_name: "Müller",
                     course_name: "Yoga für Fortgeschrittene",
                     phone: "+49 123 456789",
-                    memberID: "222",
+                    memberID: "222"
                 },
                 {
                     first_name: "Lisa",
                     last_name: "Huck",
                     course_name: "Weekend Flow",
                     phone: "+49 123 123123",
-                    memberID: "875",
+                    memberID: "875"
                 },
                 {
                     first_name: "Rebecca",
                     last_name: "Denz",
                     course_name: "Functional Yoga",
                     phone: "+49 135 791357",
-                    memberID: "37",
+                    memberID: "37"
                 }
             ]);
         }

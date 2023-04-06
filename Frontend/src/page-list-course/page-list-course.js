@@ -6,7 +6,7 @@ import HtmlTemplate from "./page-list-course.html";
 /**
  * Klasse PageList: Stellt die Listenübersicht zur Verfügung
  */
-export default class PageList extends Page {
+export default class PageListCourse extends Page {
     /**
      * Konstruktor.
      *

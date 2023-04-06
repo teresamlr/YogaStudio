@@ -41,9 +41,7 @@ class App {
             }, {
                 url: "^/course$",
                 show: () => this._gotoListCourse()
-            },
-            
-            {            
+            },{            
                 url: ".*",
                 show: () => this._gotoList()
             }
