@@ -8,11 +8,11 @@ import DatabaseFactory from "./database.js";
 import RootController from "./controller/root.controller.js";
 import RegistrationController from "./controller/registration.controller.js";
 import ReviewController from "./controller/review.controller.js";
+import CourseController from "./controller/course.controller.js";
 
 // Verzeichnisnamen der Quellcodedatei ermitteln
 import path from "path";
 import { fileURLToPath } from "url";
-import CourseController from "./controller/course.controller.js";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /* =============================================================================

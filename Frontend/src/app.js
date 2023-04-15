@@ -34,14 +34,22 @@ class App {
             },{
                 url: "^/review$",
                 show: () => this._gotoListReview()
-            },
-            {
+            }, {
                 url: "^/newreview/$",
                 show: () => this._gotoNewReview()
+            }, {          
+                url: "^/editreview/(.*)$",
+                show: matches => this._gotoEditReview(matches[1]),
             }, {
                 url: "^/course$",
                 show: () => this._gotoListCourse()
-            },{            
+            }, {
+                url: "^/newcourse/$",
+                show: () => this._gotoNewCourse()
+            }, {          
+                url: "^/editcourse/(.*)$",
+                show: matches => this._gotoEditCourse(matches[1]),
+            }, {            
                 url: ".*",
                 show: () => this._gotoList()
             }
@@ -149,6 +157,32 @@ class App {
         }
     }
 
+    async _gotoEditReview(id) {
+        try {
+            // Dynamischer Import, vgl. https://javascript.info/modules-dynamic-imports
+            let {default: PageEditReview} = await import("./page-edit-review/page-edit-review.js");
+
+            let page = new PageEditReview(this, id);
+            await page.init();
+            this._showPage(page, "editreview");
+        } catch (ex) {
+            this.showException(ex);
+        }
+    }
+
+    async _gotoEditCourse(id) {
+        try {
+            // Dynamischer Import, vgl. https://javascript.info/modules-dynamic-imports
+            let {default: PageEditCourse} = await import("./page-edit-course/page-edit-course.js");
+
+            let page = new PageEditCourse(this, id);
+            await page.init();
+            this._showPage(page, "editcourse");
+        } catch (ex) {
+            this.showException(ex);
+        }
+    }
+
     async _gotoNewReview() {
         try {
             // Dynamischer Import, vgl. https://javascript.info/modules-dynamic-imports
@@ -161,6 +195,20 @@ class App {
             this.showException(ex);
         }
     }
+
+    async _gotoNewCourse() {
+        try {
+            // Dynamischer Import, vgl. https://javascript.info/modules-dynamic-imports
+            let {default: PageEditCourse} = await import("./page-edit-course/page-edit-course.js");
+
+            let page = new PageEditCourse(this);
+            await page.init();
+            this._showPage(page, "newcourse");
+        } catch (ex) {
+            this.showException(ex);
+        }
+    }
+
 
     /**
      * Interne Methode zum Umschalten der sichtbaren Seite.

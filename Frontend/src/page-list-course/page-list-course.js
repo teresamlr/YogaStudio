@@ -69,6 +69,38 @@ export default class PageListCourse extends Page {
             let liElement = dummyElement.firstElementChild;
             liElement.remove();
             olElement.appendChild(liElement);
+
+            // Event Handler registrieren
+            liElement.querySelector(".action.edit").addEventListener("click", () => location.hash = `#/editcourse/${dataset._id}`);
+            liElement.querySelector(".action.delete").addEventListener("click", () => this._askDelete(dataset._id));
+        }
+    }
+    /**
+     * Löschen des übergebenen Kurses. Zeigt einen Popup, ob der Anwender
+     * den Kurs löschen will und löscht diese dann.
+     *
+     * @param {Integer} id ID des zu löschenden Datensatzes
+     */
+    async _askDelete(id) {
+        // Sicherheitsfrage zeigen
+        let answer = confirm("Soll der ausgewähle Kurs wirklich gelöscht werden?");
+        if (!answer) return;
+
+        // Datensatz löschen
+        try {
+            this._app.backend.fetch("DELETE", `/course/${id}`);
+        } catch (ex) {
+            this._app.showException(ex);
+            return;
+        }
+
+        // HTML-Element entfernen
+        this._mainElement.querySelector(`[data-id="${id}"]`)?.remove();
+
+        if (this._mainElement.querySelector("[data-id]")) {
+            this._emptyMessageElement.classList.add("hidden");
+        } else {
+            this._emptyMessageElement.classList.remove("hidden");
         }
     }
 };

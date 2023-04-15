@@ -1,13 +1,13 @@
 "use strict";
 
 import Page from "../page.js";
-import HtmlTemplate from "./page-edit-review.html";
+import HtmlTemplate from "./page-edit-course.html";
 
 /**
- * Klasse PageEditReview: Stellt die Seite zum Anlegen oder Bearbeiten einer Bewertung
+ * Klasse PageEditCourse: Stellt die Seite zum Anlegen oder Bearbeiten eines Kurses
  * zur Verfügung.
  */
-export default class PageEditReview extends Page {
+export default class PageEditCourse extends Page {
     /**
      * Konstruktor.
      *
@@ -21,17 +21,15 @@ export default class PageEditReview extends Page {
         this._editId = editId;
 
         this._dataset = {
-            first_name: "",
-            last_name: "",
             course_name: "",
-            text: "",
+            description: "",
+            date: "",
         };
 
         // Eingabefelder
-        this._firstNameInput  = null;
-        this._lastNameInput   = null;
-        this._courseNameInput = null;
-        this._textInput       = null;
+        this._courseNameInput  = null;
+        this._descriptionInput   = null;
+        this._dateInput = null;
     }
 
     /**
@@ -55,20 +53,19 @@ export default class PageEditReview extends Page {
 
         // Bearbeiteten Datensatz laden
         if (this._editId) {
-            this._url = `/review/${this._editId}`;
+            this._url = `/course/${this._editId}`;
             this._dataset = await this._app.backend.fetch("GET", this._url);
             this._title = `${this._dataset.first_name} ${this._dataset.last_name}`;
         } else {
-            this._url = `/review`;
-            this._title = "Bewertung hinzufügen";
+            this._url = `/course`;
+            this._title = "Kurs hinzufügen";
         }
 
         // Platzhalter im HTML-Code ersetzen
         let html = this._mainElement.innerHTML;
-        html = html.replace("$LAST_NAME$", this._dataset.last_name);
-        html = html.replace("$FIRST_NAME$", this._dataset.first_name);
         html = html.replace("$COURSE_NAME$", this._dataset.course_name);
-        html = html.replace("$TEXT$", this._dataset.text);
+        html = html.replace("$DESCRIPTION$", this._dataset.description);
+        html = html.replace("$DATE$", this._dataset.date);
         this._mainElement.innerHTML = html;
 
         // Event Listener registrieren
@@ -76,10 +73,9 @@ export default class PageEditReview extends Page {
         saveButton.addEventListener("click", () => this._saveAndExit());
 
         // Eingabefelder zur späteren Verwendung merken
-        this._firstNameInput  = this._mainElement.querySelector("input.first_name");
-        this._lastNameInput   = this._mainElement.querySelector("input.last_name");
         this._courseNameInput = this._mainElement.querySelector("input.course_name");
-        this._textInput       = this._mainElement.querySelector("input.text");
+        this._descriptionInput      = this._mainElement.querySelector("input.description");
+        this._dateInput   = this._mainElement.querySelector("input.date");
     }
 
     /**
@@ -89,18 +85,12 @@ export default class PageEditReview extends Page {
     async _saveAndExit() {
         // Eingegebene Werte prüfen
         this._dataset._id         = this._editId;
-        this._dataset.first_name  = this._firstNameInput.value.trim();
-        this._dataset.last_name   = this._lastNameInput.value.trim();
         this._dataset.course_name = this._courseNameInput.value.trim();
-        this._dataset.text        = this._textInput.value.trim();
+        this._dataset.description = this._descriptionInput.value.trim();
+        this._dataset.date        = this._dateInput.value.trim();
 
-        if (!this._dataset.first_name) {
-            alert("Geben Sie erst einen Vornamen ein.");
-            return;
-        }
-
-        if (!this._dataset.last_name) {
-            alert("Geben Sie erst einen Nachnamen ein.");
+        if (!this._dataset.course_name) {
+            alert("Geben Sie erst einen Kursname ein.");
             return;
         }
 
@@ -117,6 +107,6 @@ export default class PageEditReview extends Page {
         }
 
         // Zurück zur Übersicht
-        location.hash = "#/review";
+        location.hash = "#/course";
     }
 };
