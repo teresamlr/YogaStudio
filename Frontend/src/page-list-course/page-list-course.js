@@ -83,7 +83,7 @@ export default class PageListCourse extends Page {
      */
     async _askDelete(id) {
         // Sicherheitsfrage zeigen
-        let answer = confirm("Soll der ausgewähle Kurs wirklich gelöscht werden?");
+        let answer = confirm("Soll der ausgewählte Kurs wirklich gelöscht werden?");
         if (!answer) return;
 
         // Datensatz löschen
