@@ -122,7 +122,7 @@ class App {
     }
 
     /**
-     * Seite zum Anlegen einer neuen Adresse anzeigen.  Wird vom Single Page
+     * Seite zum Anlegen einer neuen Anmeldung anzeigen.  Wird vom Single Page
      * Router aufgerufen.
      */
     async _gotoNew() {
@@ -139,10 +139,10 @@ class App {
     }
 
     /**
-     * Seite zum Bearbeiten einer Adresse anzeigen.  Wird vom Single Page
+     * Seite zum Bearbeiten einer Anmeldung anzeigen.  Wird vom Single Page
      * Router aufgerufen.
      *
-     * @param {Number} id ID der zu bearbeitenden Adresse
+     * @param {Number} id ID der zu bearbeitenden Anmeldung
      */
     async _gotoEdit(id) {
         try {
